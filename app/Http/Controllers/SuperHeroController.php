@@ -69,6 +69,11 @@ class SuperHeroController extends Controller
     public function update(Request $request, string $id)
     {
         $superhero = Superheroe::find($id);
+
+        if (!$superhero) {
+            return redirect()->route('superheroes.index')->with('error', 'Superhero not found.');
+        }
+
         $superhero->update([
             'gender_id' => $request->gender_id,
             'universe_id' => $request->universe_id,
@@ -76,7 +81,7 @@ class SuperHeroController extends Controller
             'real_name' => $request->real_name,
             'picture' => $request->picture,
         ]);
-        return to_route('superheroes.index');
+        return redirect()->route('superheroes.index')->with('success', 'Superhero updated successfully.');
     }
 
     /**
@@ -85,8 +90,13 @@ class SuperHeroController extends Controller
     public function destroy(string $id)
     {
         $superhero = Superheroe::find($id);
+
+        if (!$superhero) {
+            return redirect()->route('superheroes.index')->with('error', 'Superhero not found.');
+        }
+
         $superhero->delete();
-        return to_route('superheroes.index');
+        return redirect()->route('superheroes.index')->with('success', 'Superhero deleted successfully.');
 
     }
 }

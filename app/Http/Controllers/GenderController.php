@@ -73,7 +73,11 @@ public function update(Request $request, string $id)
 public function destroy(string $id)
 {
     $gender = Gender::find($id);
+
+    if (!$gender) {
+        return redirect()->route('genders.index')->with('error, Gender not found');
+    }
     $gender->delete();
-    return to_route('genders.index');
+    return redirect()->route('genders.index')->with('success', 'Gender deleted successfully');
 }
 }

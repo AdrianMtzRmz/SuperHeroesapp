@@ -15,12 +15,11 @@ class Superheroe extends Model
 
     public function universes()
     {
-        return $this->belongsTo(Universe::class, 'universe_id'); // Asegúrate de que el nombre de la clave foránea sea correcto
+        return $this->belongsTo(Universe::class, 'universe_id');
     }
 
     public function gender() {
-        return $this->belongsTo(Gender::class, 'gender_id'); // Asegúrate de que el nombre de la clave foránea sea correcto
+        return $this->belongsTo(Gender::class, 'gender_id');
     }
 
 }
-

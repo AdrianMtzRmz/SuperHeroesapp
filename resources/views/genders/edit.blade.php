@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit gender</title>
-</head>
-<body>
-<h1>Edit gender</h1>
+@extends('layouts.main')
 
-<form action="{{route('genders.update', $gender->id)}}" method="POST">
-    @csrf
-    @method('patch')
-
-    <label for="name">Name:</label>
-    <input type="text" name="name" value="{{$gender->name}}">
-
-    <br>
-
-    <button type="submit" value="Edit">Edit</button>
-</form>
-</body>
-</html>
+@section('content')
+    <div class="container">
+        <h1>Edit Gender</h1>
+        <form action="{{ route('genders.update', $gender->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ $gender->name }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+@endsection

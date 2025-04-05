@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Genders</title>
-</head>
-<body>
-    <h1>Name: {{$gender->name}}</h1>
-    <h1>ID: {{$gender->id}}</h1>
-    <br>
-    <a href="{{route('genders.index')}}">All genders</a>
-</body>
-</html>
+@extends('layouts.main')
+
+@section('content')
+    <div class="container">
+        <h1>{{ $gender->name }}</h1>
+        <p><strong>ID:</strong> {{ $gender->id }}</p>
+
+        <h2>Superheroes</h2>
+        <ul>
+            @foreach ($gender->superheroes as $superhero)
+                <li>{{ $superhero->name }}</li>
+            @endforeach
+        </ul>
+
+        <a href="{{ route('genders.index') }}" class="btn btn-secondary">Back to List</a>
+    </div>
+@endsection

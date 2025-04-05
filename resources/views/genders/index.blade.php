@@ -1,42 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gender</title>
-</head>
-<body>
-<h1>Gender</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-    </tr>
-    </thead>
+@extends('layouts.main')
 
-    <tbody>
-    @foreach ($genders as $gender)
-        <tr>
-            <td>{{ $gender->id }}</td>
-            <td>{{ $gender->name }}</td>
-            <td>
-                <a href="{{route('genders.show', $gender->id)}}">Show</a>
-                <a href="{{route('genders.edit', $gender->id)}}">Edit</a>
+@section('content')
+    <div class="container">
+        <h1>Genders</h1>
+        <a href="{{ route('genders.create') }}" class="btn btn-primary">Create New Gender</a>
 
-                <form action="{{route('genders.destroy', $gender->id)}}" method="post">
-                @csrf
-                @method('delete')
-
-                <input type="submit" value="Delete" onclick="return confirm('Are you pretty sure? There is no way back')">
-                </form>
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
-<br>
-<a href="{{route('genders.create')}}">Create new gender</a>
-</body>
-</html>
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($genders as $gender)
+                <tr>
+                    <td>{{ $gender->id }}</td>
+                    <td>{{ $gender->name }}</td>
+                    <td>
+                        <a href="{{ route('genders.show', $gender->id) }}" class="btn btn-info">Show</a>
+                        <a href="{{ route('genders.edit', $gender->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('genders.destroy', $gender->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection

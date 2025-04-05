@@ -12,8 +12,8 @@ class Gender extends Model
     protected $table = 'genders';
     protected $fillable = ['name'];
 
-    public function gender()
+    public function superheroes()
     {
-        return $this->belongsTo(Gender::class, 'gender_id');
+        return $this->hasMany(Superheroe::class);
     }
 }
