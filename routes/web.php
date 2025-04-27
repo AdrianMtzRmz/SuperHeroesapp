@@ -18,10 +18,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::resource('universes', UniverseController::class);
-Route::resource('superheroes', SuperheroController::class);
-Route::resource('genders', GenderController::class);
+
+    Route::resource('superheroes', SuperHeroController::class);
+
+    Route::resource('gender', GenderController::class);
+
+    Route::resource('universes', UniverseController::class);
+
+
+    Route::resources([ 
+        'superheroes'=> SuperheroController::class,
+    ]);
+    Route::get('/form', function () {
+        return view('form');
+    });
+
+    Route::post('/upload', [FileController::class, 'upload'])->name('upload');
+
+
+});
 
 require __DIR__.'/auth.php';
